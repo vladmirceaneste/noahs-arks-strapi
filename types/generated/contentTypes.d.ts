@@ -410,6 +410,51 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAnimalAnimal extends Struct.CollectionTypeSchema {
+  collectionName: 'animals';
+  info: {
+    displayName: 'Animal';
+    pluralName: 'animals';
+    singularName: 'animal';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::animal.animal'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    photos: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID;
+    statusd: Schema.Attribute.Enumeration<
+      [
+        'Donation',
+        'Adoption',
+        'Donation/Adoption',
+        'New Home',
+        'Rainbow Bridge',
+      ]
+    >;
+    stripeUrl: Schema.Attribute.String;
+    timelineUpdate: Schema.Attribute.Component<'animal.timeline-update', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -920,6 +965,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::animal.animal': ApiAnimalAnimal;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

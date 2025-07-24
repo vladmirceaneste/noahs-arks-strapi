@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_animal_timeline_updates",
+  "info": {
+    "displayName": "timelineUpdate"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}
